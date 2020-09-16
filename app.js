@@ -9,8 +9,11 @@ function Product(name, img) {
     this.img = img;
     this.vote = 0;
     this.totalVotes = 0;
+    this.seenIt = false;
     productBucket.push(this);
+    console.log(productBucket.length);
 }
+
 // --------------------------------new objects--------------------------
 new Product('bag', 'img/assets/bag.jpg');
 new Product('banana', 'img/assets/banana.jpg');
@@ -37,16 +40,29 @@ new Product('wine-glass', 'img/assets/wine-glass.jpg');
 function randomIndexVal() {
     var randomizer = Math.floor(Math.random() * productBucket.length);
     return randomizer;
+    // var randomizer;
+    // safety = 10;
+    // // do{ 
+    //     randomizer = Math.floor(Math.random() * productBucket.length);
+    //     safety--;
+    //     console.log(randomizer);
+    //     console.log(currentlyShowing);
+
+    // } while (currentlyShowing.includes(randomizer)&& safety) 
+
 }
 
-// ----------------------------random without duplicates--------------------------
-var temparr = [];
+
+
+// ----------------------------select random without duplicates--------------------------
+var currentlyShowing = [];
 
 function render() {
     
     var temp1;
     var temp2;
     var temp3;
+    console.log(temp1);
     
     // rolling temp1
     temp1 = randomIndexVal();
@@ -61,24 +77,38 @@ function render() {
         temp3 = randomIndexVal();
     } while (temp3 === temp1 || temp3 === temp2);
     
-    temparr = [temp1, temp2, temp3]
+ currentlyShowing = [temp1, temp2, temp3]
+    document.getElementById('left').setAttribute('src', productBucket[temp1].img);
+    document.getElementById('center').setAttribute('src', productBucket[temp2].img);
+    document.getElementById('right').setAttribute('src', productBucket[temp3].img);
 }
 
+render ();
+
+// ----------------------increment votes----------------------------------------------------
+// need to do           
 
 // ---------------------------stick 3 imjages to page-------------------
-var left = document.getElementById('left').setAttribute('src', temparr[0]);
-var center = document.getElementById('center').setAttribute('src', temparr[1]);
-var right = document.getElementById('right').setAttribute('src', temparr[2]);
         //    the adress of where things go
 
-// -------------------------------votes -------------------------------
+// -------------------------------clicked votes -------------------------------
 function handlevote(event) {
-    var thingThatWasClicked = event.target;
+    event.preventDefault();
+    var thingThatWasClicked = event.target.attributes[1].value;
     var productId = thingThatWasClicked.src;
-}
+}                                      
 
-// ---------------------------event listeners------------------------
+// ---------------------------event listeners/clickers------------------------
 
 // right.addEventListener(click, handleVote);
 // center.addEventListener(click, handleVote);
 // left.addEventListener(click, handleVote);
+
+// ----------------------------what is currently rendered----------------------------------------------
+// var previousimg1 = left.src;
+// var previousimg2 = right.src;
+// var previousimg3 = center.src;
+
+// var newimg  = productId[randomIndexVal()].image
+
+// img
