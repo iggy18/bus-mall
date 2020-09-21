@@ -5,7 +5,6 @@ var left = document.getElementById('left'); //<----------------- finds specified
 var right = document.getElementById('right');
 var center = document.getElementById('center');
 var maxClick = 0;
-// var chart = new chart(ctx)
 
 // -------------------------------object constructor-----------
 function Product(name, img) {
@@ -82,13 +81,25 @@ render();
 // <------------------------------------------------------------print results to page-------------------------
 function printResults() {
     var getThis = document.getElementById('results')
-    console.log('this', productBucket);
     for (let i = 0; i < productBucket.length; i++) {
         var postIt = document.createElement('li');
-        postIt.innerHTML =  productBucket[i].name + ' was voted for ' + productBucket[i].vote + ' times, and seen '+ productBucket[i].seenIt + ' times. ';      // <------------------------ HOW DO I GET OBJECT NAME, VOTES, SEEN
+        postIt.innerHTML = productBucket[i].name + ' was voted for ' + productBucket[i].vote + ' times, and seen ' + productBucket[i].seenIt + ' times. ';      // <------------------------ HOW DO I GET OBJECT NAME, VOTES, SEEN
         getThis.appendChild(postIt);
     }
 }
+
+// function look() {
+//     for (let i = 0; i < productBucket.length; i++) {
+//         var lol = productBucket[i].vote;
+//         return lol;
+// }
+
+// function liked() {
+//     for (let i = 0; i < productBucket.length; i++) {
+// }
+
+
+
 
 // -------------------------------clicked/vote increment -------------------------------
 function handleVote(event) {
@@ -106,11 +117,51 @@ function handleVote(event) {
         left.removeEventListener('click', handleVote);
         printResults(); // <------------------------------------call function with for loop for results /\
         // localStorage.setItem('productdata', JSON.stringify('productBucket')
+
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['bag', 'banana', 'boots', 'chair', 'cthulhu', 'dragon', 'pen', 'scissors', 'shark', 'sweep', 'unicorn', 'usb', 'water can', 'wine glass'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
     }
     maxClick = maxClick + 1; // <---------------------------------placed here because this counts every click
     render();
     console.log('maxclicks', maxClick);
 }
+
 
 // ---------------------------event listeners/clickers------------------------
 

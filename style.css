@@ -1,7 +1,31 @@
+/* --minion-yellow: #ffe74cff;
+--fiery-rose: #ff5964ff;
+--white: #ffffffff;
+--lapis-lazuli: #38618cff;
+--blue-jeans: #35a7ffff; */
+
 body { 
-    margin:auto;
+    margin:10px, auto;
+    background: #38618cff;
+    color: #ffffffff;
+    text-align: center;
 }
 
 img {
-    width: 300px;
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 20px;
+    border:7px solid #35a7ffff;
+    box-shadow: 20px 20px 19px 3px rgba(0,0,0,0.29);
+    margin: 15px;
+}
+
+#results{
+    margin: auto;
+    background: #35a7ffff;
+    border-radius: 15px;
+    border: 7px solid white;
+    width: 700px;
+    list-style-position: inside;
+    box-shadow: 20px 20px 19px 3px rgba(0,0,0,0.29);
 }
